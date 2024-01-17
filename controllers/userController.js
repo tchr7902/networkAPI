@@ -51,6 +51,26 @@ const userController = {
         .then(() => res.json({ message: 'User and associated thoughts deleted successfully!'}))
         .catch((err) => res.status(400).json(err));
     },
+
+    addFriend(req, res) {
+        User.findByIdAndUpdate(
+            req.params.userId,
+            { $push: { friends: req.params.friendId } },
+            { new: true, runValidators: true }
+        )
+        .then((user) => res.json(user))
+        .catch((err) => res.status(400).json(err));
+    },
+
+    removeFriend(req, res) {
+        User.findByIdAndUpdate(
+            req.params.userId,
+            { $pull: { friends: req.params.friendId } },
+            { new: true, runValidators: true }
+        )
+        .then((user) => res.json(user))
+        .catch((err) => res.status(400).json(err))
+    }
 };
 
 module.exports = userController;
