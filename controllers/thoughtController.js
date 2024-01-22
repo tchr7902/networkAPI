@@ -1,5 +1,6 @@
-const { User } = require('../models/User');
-const { Thought } = require('../models/Thought');
+const User = require('../models/User');
+const Thought = require('../models/Thought');
+const Reaction = require('../models/Reaction');
 
 const thoughtController = {
     getAllThoughts(req, res) {
@@ -75,6 +76,15 @@ const thoughtController = {
         .then((thought) => res.json(thought))
         .catch((err) => res.status(400).json(err));
     },
+
+    getAllReactions(req, res) {
+        Reaction.find()
+            .select('-__v')
+            .then((reactions) => res.json(reactions))
+            .catch((err) => res.status(400).json(err));
+    },
+    
+
 }
 
 module.exports = thoughtController;

@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
-const db = require('./config/db');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -11,7 +10,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/social_ne
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
 
 const dbConnection = mongoose.connection;
 dbConnection.on('error', console.error.bind(console, 'Connection Error:'));
@@ -23,7 +21,7 @@ dbConnection.once('open', () => {
   app.use(express.urlencoded({ extended: true }));
 
   // Apply routes
-  app.use('/api/users', routes);
+  app.use('/api', routes); // Use '/api' as the prefix for all routes
 
   // Error handling middleware
   app.use((err, req, res, next) => {
