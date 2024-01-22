@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+
+// getting all functions for the userRoutes, applying those functions to specific routes
 const {
     getAllUsers,
     getUserById,

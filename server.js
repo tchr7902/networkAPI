@@ -11,6 +11,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/social_ne
   useUnifiedTopology: true,
 });
 
+// error handling if connection fails
 const dbConnection = mongoose.connection;
 dbConnection.on('error', console.error.bind(console, 'Connection Error:'));
 dbConnection.once('open', () => {

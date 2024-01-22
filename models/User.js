@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
 
+// mongoose schema with parameters
 const userSchema = new Schema({
     username: {
         type: String,

@@ -1,7 +1,10 @@
+// models
 const User = require('../models/User.js');
 const Thought = require('../models/Thought.js');
 
+// the user controller and its corresponding functions
 const userController = {
+    // gets all users
     getAllUsers(req, res) {
         User.find()
             .populate({
@@ -17,6 +20,7 @@ const userController = {
             .catch((err) => res.status(400).json(err));
     },
 
+    // gets a specific user by its id
     getUserById(req, res, next) {
         const { id } = req.params;
 
@@ -34,18 +38,21 @@ const userController = {
             .catch(next);
     },
 
+    // creates a user
     createUser(req, res) {
         User.create(req.body)
         .then((user) => res.json(user))
         .catch((err) => res.status(400).json(err));
     },
 
+    // updates a users information
     updateUser(req, res) {
         User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
         .then((user) => res.json(user))
         .catch((err) => res.status(400).json(err));
     },
 
+    // can delete a user by its id
     deleteUser(req, res, next) {
         const { id } = req.params;
 
@@ -65,6 +72,7 @@ const userController = {
             .catch(next);
     },
 
+    // can add a friend using two user ids
     addFriend(req, res) {
         User.findByIdAndUpdate(
             req.params.userId,
@@ -75,6 +83,7 @@ const userController = {
         .catch((err) => res.status(400).json(err));
     },
 
+    // can remove a friend using two user ids
     removeFriend(req, res) {
         User.findByIdAndUpdate(
             req.params.userId,

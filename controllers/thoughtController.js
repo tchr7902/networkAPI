@@ -1,8 +1,11 @@
+// importing models
 const User = require('../models/User');
 const Thought = require('../models/Thought');
 const Reaction = require('../models/Reaction');
 
+// the thought controller
 const thoughtController = {
+    // gets all of the user's thoughts
     getAllThoughts(req, res) {
         Thought.find()
         .populate({
@@ -14,6 +17,7 @@ const thoughtController = {
         .catch((err) => res.status(400).json(err));
     },
 
+    // gets a specific thought by its corresponding id
     getThoughtById(req, res) {
         Thought.findById(req.params.id)
         .populate({
@@ -25,6 +29,7 @@ const thoughtController = {
         .catch((err) => res.status(400).json(err));
     },
 
+    // allows for a thought to be created on a user
     createThought(req, res) {
         Thought.create(req.body)
         .then((thought) => {
@@ -38,12 +43,14 @@ const thoughtController = {
         .catch((err) => res.status(400).json(err));
     },
 
+    // allows for the thought to be updated, finding it by its id and pushing the new information
     updateThought(req, res) {
         Thought.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
         .then((thought) => res.json(thought))
         .catch((err) => res.status(400).json(err));
     },
 
+    // allows for removal of a thought by its id
     deleteThought(req, res) {
         Thought.findByIdAndDelete(req.params.id)
         .then((thought) => {
@@ -57,6 +64,7 @@ const thoughtController = {
         .catch((err) => res.status(400).json(err));
     },
 
+    // adds a reaction to a specific thought
     createReaction(req, res) {
         Thought.findByIdAndUpdate(
             req.params.thoughtId,
@@ -67,6 +75,7 @@ const thoughtController = {
         .catch((err) => res.status(400).json(err));
     },
 
+    // can delete a certain reaction from its id
     deleteReaction(req, res) {
         Thought.findByIdAndUpdate(
             req.params.thoughtId,
@@ -77,6 +86,7 @@ const thoughtController = {
         .catch((err) => res.status(400).json(err));
     },
 
+    // displays all of the reactions
     getAllReactions(req, res) {
         Reaction.find()
             .select('-__v')

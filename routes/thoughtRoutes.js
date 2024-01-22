@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+// getting all functions for the thoughtRoutes, applying those functions to specific routes
 const {
     getAllThoughts,
     getThoughtById,

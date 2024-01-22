@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+// mongoose schema with parameters
 const reactionSchema = new Schema({
     reactionBody: {
         type: String,

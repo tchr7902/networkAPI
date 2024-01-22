@@ -1,3 +1,4 @@
+// starting express, exporting the app
 const express = require('express');
 
 const app = express();
